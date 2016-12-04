@@ -1,0 +1,169 @@
+﻿
+
+@model IEnumerable<ExpenseTracker.Models.UserDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Details</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<form action="#" novalidate name="userForm" ng-submit="(submitted=true) && userForm.$invalid && $event.preventDefault()" ng-class="{true:'submitted'}[submitted]">
+    @*<form name="userForm">*@
+
+    <div ng-controller="ExpenseTrackerController">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </th>*@
+                <th></th>
+            </tr>
+
+            <tr ng-repeat="user in user">
+                @*<td>
+
+                        {{user.UserId}}
+                    </td>*@
+                <td>
+                    {{user.UserName}}
+                </td>
+
+                <td><b>{{user.Address }}</b></td>
+                <td>
+                    {{user.PhoneNo}}
+                </td>
+                <td>
+
+                    {{user.Email}}
+                </td>
+                @*<td>
+                        {{user.Remark}}
+                    </td>*@
+                <td>
+                    <button type="button" class="btn btn-primary btn-xs" title="Click to Edit selected record." data-toggle="modal"
+                            data-target="#modal-config" id="myeditbtn" ng-click="submitted=false;editUser(user)">
+                        Edit
+                    </button>
+
+                    @*<span ng-click="editUser(user)" class="btn btn-primary">Edit</span>*@
+                    <span ng-click="deleteUser(user)" class="btn btn-danger">Delete</span>
+                </td>
+            </tr>
+
+        </table>
+        <div class="container">
+            @*<h2>User Details</h2>*@
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-default btn-lg" id="myBtn">Add User</button>
+
+            <!-- Modal -->
+            <div class="modal modal-lg" id="myModal">
+                <div>
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h2> User Details</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="usrname"> User Name</label>
+
+
+                                    <input type="text" class="form-control" id="username" name="UserName" ng-model="UserName" placeholder="Enter name" maxlength="50" required>
+
+                                    <div ng-messages="userForm.UserName.$error">
+                                    </div>
+                                    @*<span class="error" ng-show="submitted && modalForm.usrname.$error.required ">
+                                            Username is required!
+                                        </span>*@
+                                    @*<span ng-show="myForm.UserName.$touched && myForm.UserName.$invalid">The name is required.</span>*@
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="psw">Address</label>
+                                    <input type="text" class="form-control" id="Address" ng-model="Address" placeholder="Enter Address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="psw">PhoneNo</label>
+                                    <input type="text" class="form-control" id="PhoneNo" ng-model="PhoneNo" placeholder="Enter PhoneNo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="usrname">Email</label>
+                                    <input type="email" class="form-control" id="Email" ng-model="Email" placeholder="Enter Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="usrname">Remark</label>
+                                    <input type="text" class="form-control" id="Remark" ng-model="Remark" placeholder="Enter Remark">
+                                    @*<textarea id="Remark" ng-model="Remark" class="form-control" placeholder="Enter Remark"
+                                        maxlength="300" style="resize:none;" cols="30" rows="2" />*@
+                                </div>
+                                <button type="submit" id="AddId" class="btn btn-success " value="{{ current_user ? 'Update' : 'Save' }}" ng-click="AddorUpdateUser()">Add </button>
+                                <button type="submit" class="btn btn-danger " data-dismiss="modal"> Cancel</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <style>
+                .modal-header, h4, .close {
+                    background-color: #4d94af;
+                    color: white !important;
+                    text-align: center;
+                    font-size: 10px;
+                }
+
+                .modal-footer {
+                    background-color: #f9f9f9;
+                }
+            </style>
+        </head>
+
+        <script>
+            $(document).ready(function () {
+                $("#myBtn").click(function () {
+                    $("#myModal").modal();
+
+                });
+
+            });
+
+
+        </script>
+    </div>
+</form>
+

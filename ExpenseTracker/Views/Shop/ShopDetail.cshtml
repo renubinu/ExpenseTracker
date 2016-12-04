@@ -1,0 +1,127 @@
+﻿@model IEnumerable<ExpenseTracker.Models.ShopDetails>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Shop Details</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+
+<div ng-controller="ShopControllers">
+
+    <table tr-ng-grid='' class="table">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopName)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th></th>
+        </tr>
+        <tr ng-repeat="x in shop">
+
+            <td> {{x.ShopName}} </td>
+            <td> {{x.Description}}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-xs" id="BtnEdit" title="Click to Edit selected record." data-toggle="modal"
+                        data-target="#modal-config" ng-click="submitted=false;editShop(x)">
+                    Edit
+                </button>
+                <span ng-click="deleteShop(x)" class="btn btn-danger">Delete</span>
+            </td>
+        </tr>
+    </table>
+
+
+
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-default btn-lg" id="idBtnEdit">Add Shop</button>
+
+            <!-- Modal -->
+            <div class="modal modal-lg" id="shopModal">
+                - Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2> Shop Details</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="shopname"> Shop Name</label>
+
+
+                                <input type="text" class="form-control" id="shopname" name="shopname" ng-model="shopname" placeholder="Enter name" maxlength="50" required>
+
+                                <div ng-messages="userForm.shopname.$error">
+                                </div>
+                                @*<span class="error" ng-show="submitted && modalForm.usrname.$error.required ">
+                                        Username is required!
+                                    </span>*@
+                                @*<span ng-show="myForm.UserName.$touched && myForm.UserName.$invalid">The name is required.</span>*@
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" ng-model="description" placeholder="Enter description">
+                            </div>
+
+                            <button type="submit" id="AddShopId" class="btn btn-success " value="Add" ng-click="AddorUpdateShop()">Add </button>
+                            <button type="submit" class="btn btn-danger " data-dismiss="modal"> Cancel</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+
+
+                    </div>
+
+                    <head>
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                        <style>
+                            .modal-header, h4, .close {
+                                background-color: #ed8e9e;
+                                color: white !important;
+                                text-align: center;
+                                font-size: 10px;
+                            }
+
+                            .modal-footer {
+                                background-color: #f9f9f9;
+                            }
+                        </style>
+                    </head>
+
+                    <script>
+                        $(document).ready(function () {
+                            $("#idBtnEdit").click(function () {
+                                $("#shopModal").modal();
+
+                            });
+
+                        });
+
+                        //toastr.pop('success', "Notificaton", "Hello codershood.info", 5000, 'trustedHtml');
+
+                    </script>
+                </div>
+
+            </div>
+        </div>
+
+   
+</div>
+
